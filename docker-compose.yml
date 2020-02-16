@@ -1,0 +1,8 @@
+version: "3"
+services:
+  py_environment:
+    build: .
+    volumes:
+      - $PWD:/tmp/working
+    working_dir: /tmp/working/project
+    command: python source/hello.py
