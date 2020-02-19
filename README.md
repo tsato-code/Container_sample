@@ -46,7 +46,7 @@ $ pytest
 | Module   	| Description                	| Input 	            | Output           	            |
 |----------	|----------------------------	|-------------------	|----------------------------	|
 | Prepare  	| Get dataset and transforme 	| Data file (*.csv) 	| Feature file (*.pkl)          |
-| Train    	| Train the model            	| Feature file (*.pkl) 	| Model file (*.ckp)   	        |
+| Train    	| Train the model            	| Feature file (*.pkl) 	| Model file (*.pkl)   	        |
 | Evaluate 	| Evaluate the model         	| Model file (*.pkl) 	| Loss plot file (*.png)        |
 |          	|                            	| Feature file (*.pkl) 	| Importance plot file (*.png) 	|
 
