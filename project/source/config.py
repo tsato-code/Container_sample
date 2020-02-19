@@ -4,7 +4,7 @@ import yaml
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-y", "--yaml", default="./project/_config.yml", help="yaml file")
+    parser.add_argument("-y", "--yaml", default="./project/config.yml", help="yaml file")
     parser.add_argument("-n", "--note", default=None, help="memo")
     args = parser.parse_args()
     return args
