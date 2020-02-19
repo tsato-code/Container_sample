@@ -43,12 +43,12 @@ $ pytest
 
 ## Module design
 
-| Module   	| Description                	| Input 	| Output           	|
-|----------	|----------------------------	|-------	|------------------	|
-| Prepare  	| Get dataset and transforme 	| *.csv 	| *.pkl            	|
-| Train    	| Train the model            	| *.pkl 	| *.ckp            	|
-| Evaluate 	| Evaluate the model         	| *.ckp 	| *_loss.png       	|
-|          	|                            	| *.pkl 	| *_importance.png 	|
+| Module   	| Description                	| Input 	            | Output           	            |
+|----------	|----------------------------	|-------------------	|----------------------------	|
+| Prepare  	| Get dataset and transforme 	| Data file (*.csv) 	| Feature file (*.pkl)          |
+| Train    	| Train the model            	| Feature file (*.pkl) 	| Model file (*.ckp)   	        |
+| Evaluate 	| Evaluate the model         	| Model file (*.pkl) 	| Loss plot file (*.png)        |
+|          	|                            	| Feature file (*.pkl) 	| Importance plot file (*.png) 	|
 
 ## Folder tree
 ```
