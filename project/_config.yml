@@ -1,0 +1,19 @@
+URL:
+    DATA_URL: "https://archive.ics.uci.edu/ml/machine-learning-databases/00332/OnlineNewsPopularity.zip"
+DIR:
+    DATA_DIR: "./project/data/raw"
+    PKL_DIR: "./project/data/pickle"
+    FEATURE_DIR: "./project/feature"
+    MODEL_DIR: "./project/models"
+    FIGURE_DIR: "./project/figure"
+    LOG_DIR: "./project/logs"
+PATH:
+    DATA_PATH: "./project/data/raw/OnlineNewsPopularity/OnlineNewsPopularity.csv"
+    X_TRAIN_PATH: "./project/data/pickle/X_train.pkl"
+    Y_TRAIN_PATH: "./project/data/pickle/Y_train.pkl"
+    X_TEST_PATH: "./project/data/pickle/X_test.pkl"
+    Y_TEST_PATH: "./project/data/pickle/Y_test.pkl"
+LGBM:
+    LOSS_PATH: "./project/figure/lbg_loss.png"
+    IMPORTANCE_PATH: "./project/figure/lgb_importance.png"
+    MODEL_PATH: "./project/models/lgb.pkl"
