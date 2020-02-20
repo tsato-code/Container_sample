@@ -8,6 +8,7 @@ import os
 import pandas as pd
 import pickle
 import seaborn as sns
+import time
 
 
 logger = getLogger(None)
@@ -35,8 +36,8 @@ def main():
         X_train = pickle.load(f)
     with open(yml["PATH"]["Y_TRAIN_PATH"], "rb") as f:
         y_train = pickle.load(f)
-    logger.info("load {}".format(yml["PATH"]["X_TRAIN_PATH"]))
-    logger.info("load {}".format(yml["PATH"]["Y_TRAIN_PATH"]))
+    logger.info(f"load {yml['PATH']['X_TRAIN_PATH']}")
+    logger.info(f"load {yml['PATH']['Y_TRAIN_PATH']}")
 
     # split
     X_trn, X_val, y_trn, y_val = train_test_split(X_train, y_train, test_size=10000, random_state=0)
@@ -87,7 +88,7 @@ def main():
     # save
     with open(yml["LGBM"]["MODEL_PATH"], "wb") as f:
         pickle.dump(model, f)
-    logger.info("save {}".format(yml["LGBM"]["MODEL_PATH"]))
+    logger.info(f"save {yml['LGBM']['MODEL_PATH']}")
 
 
 if __name__ == "__main__":
@@ -113,5 +114,9 @@ if __name__ == "__main__":
 
     for key in yml:
         for param in yml[key]:
-            logger.info("param: {}={}".format(param, yml[key][param]))
+            logger.info(f"para: {param}={yml[key][param]}")
+
+    start = time.time()
     main()
+    elapsed = time.time() - start
+    logger.info(f"elapsed: {elapsed} [sec]")

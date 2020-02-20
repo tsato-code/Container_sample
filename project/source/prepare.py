@@ -6,6 +6,7 @@ import os
 import pandas as pd
 import pickle
 import requests
+import time
 import zipfile
 
 
@@ -34,7 +35,7 @@ def get_data():
                 f.extractall(yml["DIR"]["DATA_DIR"])
             logger.info("Unziped.")
         except Exception as e:
-            logger.info("Failure: {}".format(e))
+            logger.info("Failure: {e}")
     else:
         logger.info("Dataset exists.")
 
@@ -72,8 +73,8 @@ def main():
 
     # split data
     train_df, test_df = train_test_split(df, test_size=9644, random_state=0)
-    logger.info("# train: {}".format(train_df.shape))
-    logger.info("# test: {}".format(test_df.shape))
+    logger.info("# train: {len(train_df)}")
+    logger.info("# test: {len(test_df)}")
 
     # get feature
     X_train = create_feature(train_df)
@@ -90,10 +91,10 @@ def main():
         pickle.dump(X_test, f)
     with open(yml["PATH"]["Y_TEST_PATH"], "wb") as f:
         pickle.dump(y_test, f)
-    logger.info("save {}".format(yml["PATH"]["X_TRAIN_PATH"]))
-    logger.info("save {}".format(yml["PATH"]["Y_TRAIN_PATH"]))
-    logger.info("save {}".format(yml["PATH"]["X_TEST_PATH"]))
-    logger.info("save {}".format(yml["PATH"]["Y_TEST_PATH"]))
+    logger.info(f"save {yml['PATH']['X_TRAIN_PATH']}")
+    logger.info(f"save {yml['PATH']['Y_TRAIN_PATH']}")
+    logger.info(f"save {yml['PATH']['X_TEST_PATH']}")
+    logger.info(f"save {yml['PATH']['Y_TEST_PATH']}")
 
 
 if __name__ == "__main__":
@@ -119,6 +120,9 @@ if __name__ == "__main__":
 
     for key in yml:
         for param in yml[key]:
-            logger.info("param: {}={}".format(param, yml[key][param]))
+            logger.info(f"param: {param}={yml[key][param]}")
 
+    start = time.time()
     main()
+    elapsed = time.time() - start
+    logger.info(f"elapsed: {elapsed} [sec]")

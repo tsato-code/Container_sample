@@ -3,6 +3,7 @@ import config
 import numpy as np
 import os
 import pickle
+import time
 
 
 logger = getLogger(None)
@@ -24,8 +25,8 @@ def main():
         X_test = pickle.load(f)
     with open(yml["PATH"]["Y_TEST_PATH"], "rb") as f:
         y_test = pickle.load(f)
-    logger.info("load {}".format(yml["PATH"]["X_TEST_PATH"]))
-    logger.info("load {}".format(yml["PATH"]["Y_TEST_PATH"]))
+    logger.info(f"load {yml['PATH']['X_TEST_PATH']}")
+    logger.info(f"load {yml['PATH']['Y_TEST_PATH']}")
 
     # load model
     with open(yml["LGBM"]["MODEL_PATH"], "rb") as f:
@@ -34,7 +35,7 @@ def main():
     # show test mape
     test_pred = model.predict(X_test)
     test_mape = calc_mape(y_test.values, test_pred)
-    logger.info("test mape: {}".format(test_mape))
+    logger.info(f"test mape: {test_mape}")
 
 
 if __name__ == "__main__":
@@ -60,5 +61,9 @@ if __name__ == "__main__":
 
     for key in yml:
         for param in yml[key]:
-            logger.info("param: {}={}".format(param, yml[key][param]))
+            logger.info(f"param: {param}={yml[key][param]}")
+    
+    start = time.time()
     main()
+    elapsed = time.time() - start
+    logger.info(f"elapsed: {elapsed} [sec]")
