@@ -30,6 +30,33 @@ def mape_func(y_pred, data):
     return "mape", mape, False
 
 
+def plot_importance(model):
+    feature_importance = pd.DataFrame({
+        "feature_name": model.feature_name(),
+        "importance": model.feature_importance(importance_type="gain")
+    })
+    feature_importance = feature_importance.sort_values("importance", ascending=False)
+    fig = plt.figure(figsize=(8, 12))
+    ax = fig.add_subplot(111)
+    sns.barplot(data=feature_importance, x="importance", y="feature_name", ax=ax)
+    plt.savefig(yml["LGBM"]["IMPORTANCE_PATH"], bbox_inches="tight")
+
+    # save
+    with open(yml["LGBM"]["MODEL_PATH"], "wb") as f:
+        pickle.dump(model, f)
+    logger.info(f"save {yml['LGBM']['MODEL_PATH']}")
+
+
+def plot_loss(result_df):
+    fig, ax = plt.subplots(figsize=(10, 6))
+    result_df[["train_mape", "valid_mape"]].plot(ax=ax)
+    ax.set_xscale('symlog')
+    ax.set_ylabel("MAPE [%]")
+    ax.set_xlabel("# iteration")
+    ax.grid()
+    plt.savefig(yml["LGBM"]["LOSS_PATH"])
+
+
 def main():
     # load feature
     with open(yml["PATH"]["X_TRAIN_PATH"], "rb") as f:
@@ -66,29 +93,10 @@ def main():
 
     # show loss
     result_df = pd.DataFrame(result_dic["training"]).add_prefix("train_").join(pd.DataFrame(result_dic["valid_1"]).add_prefix("valid_"))
-    fig, ax = plt.subplots(figsize=(10, 6))
-    result_df[["train_mape", "valid_mape"]].plot(ax=ax)
-    ax.set_xscale('symlog')
-    ax.set_ylabel("MAPE [%]")
-    ax.set_xlabel("# iteration")
-    ax.grid()
-    plt.savefig(yml["LGBM"]["LOSS_PATH"])
+    plot_loss(result_df)
 
-    # show importance
-    feature_importance = pd.DataFrame({
-        "feature_name": model.feature_name(),
-        "importance": model.feature_importance(importance_type="gain")
-    })
-    feature_importance = feature_importance.sort_values("importance", ascending=False)
-    fig = plt.figure(figsize=(8, 12))
-    ax = fig.add_subplot(111)
-    sns.barplot(data=feature_importance, x="importance", y="feature_name", ax=ax)
-    plt.savefig(yml["LGBM"]["IMPORTANCE_PATH"], bbox_inches="tight")
-
-    # save
-    with open(yml["LGBM"]["MODEL_PATH"], "wb") as f:
-        pickle.dump(model, f)
-    logger.info(f"save {yml['LGBM']['MODEL_PATH']}")
+    # plot importance
+    plot_importance(model)
 
 
 if __name__ == "__main__":

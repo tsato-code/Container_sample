@@ -47,8 +47,10 @@ $ pytest
 | Prepare  	| Get dataset and transforme 	| Data file (*.csv) 	| Feature file (*.pkl)          |
 | Train    	| Train the model 				| Feature file (*.pkl) 	| Model file (*.pkl)   	        |
 | 			| 					        	| 						| Importance plot file (*.png)  |
-| Evaluate  | Evaluate the Model 			| Model file (*.pkl) 	| Loss plot file (*.png)        |
+|			|								|						| Loss plot file (*.png)		|
+| Evaluate  | Evaluate the Model 			| Model file (*.pkl) 	|        						|
 |          	|								| Feature file (*.pkl) 	| 								|
+
 
 
 ## Folder tree
