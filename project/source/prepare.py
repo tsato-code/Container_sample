@@ -125,4 +125,4 @@ if __name__ == "__main__":
     start = time.time()
     main()
     elapsed = time.time() - start
-    logger.info(f"elapsed: {elapsed} [sec]")
+    logger.info(f"elapsed: {elapsed:4f} [sec]")
