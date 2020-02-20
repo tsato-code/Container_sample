@@ -1,6 +1,6 @@
-from logging import getLogger, StreamHandler, DEBUG, Formatter, FileHandler
+from config import config
+from logger import logger
 from sklearn.model_selection import train_test_split
-import config
 import lightgbm as lgb
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,13 +9,6 @@ import pandas as pd
 import pickle
 import seaborn as sns
 import time
-
-
-logger = getLogger(None)
-
-args = config.get_args()
-yml = config.get_config(args.yaml)
-yml["DIR"]["HOME_DIR"] = os.path.dirname(__file__)
 
 
 def calc_mape(y_true, y_pred):
@@ -39,12 +32,12 @@ def plot_importance(model):
     fig = plt.figure(figsize=(8, 12))
     ax = fig.add_subplot(111)
     sns.barplot(data=feature_importance, x="importance", y="feature_name", ax=ax)
-    plt.savefig(yml["LGBM"]["IMPORTANCE_PATH"], bbox_inches="tight")
+    plt.savefig(config["LGBM"]["IMPORTANCE_PATH"], bbox_inches="tight")
 
     # save
-    with open(yml["LGBM"]["MODEL_PATH"], "wb") as f:
+    with open(config["LGBM"]["MODEL_PATH"], "wb") as f:
         pickle.dump(model, f)
-    logger.info(f"save {yml['LGBM']['MODEL_PATH']}")
+    logger.info(f"save {config['LGBM']['MODEL_PATH']}")
 
 
 def plot_loss(result_df):
@@ -54,17 +47,17 @@ def plot_loss(result_df):
     ax.set_ylabel("MAPE [%]")
     ax.set_xlabel("# iteration")
     ax.grid()
-    plt.savefig(yml["LGBM"]["LOSS_PATH"])
+    plt.savefig(config["LGBM"]["LOSS_PATH"])
 
 
 def main():
     # load feature
-    with open(yml["PATH"]["X_TRAIN_PATH"], "rb") as f:
+    with open(config["PATH"]["X_TRAIN_PATH"], "rb") as f:
         X_train = pickle.load(f)
-    with open(yml["PATH"]["Y_TRAIN_PATH"], "rb") as f:
+    with open(config["PATH"]["Y_TRAIN_PATH"], "rb") as f:
         y_train = pickle.load(f)
-    logger.info(f"load {yml['PATH']['X_TRAIN_PATH']}")
-    logger.info(f"load {yml['PATH']['Y_TRAIN_PATH']}")
+    logger.info(f"load {config['PATH']['X_TRAIN_PATH']}")
+    logger.info(f"load {config['PATH']['Y_TRAIN_PATH']}")
 
     # split
     X_trn, X_val, y_trn, y_val = train_test_split(X_train, y_train, test_size=10000, random_state=0)
@@ -100,29 +93,9 @@ def main():
 
 
 if __name__ == "__main__":
-    fmt_text = (
-        "%(asctime)s %(name)s %(lineno)d"
-        " [%(levelname)s][%(funcName)s] %(message)s"
-    )
-    log_fmt = Formatter(fmt_text)
-
-    handler = StreamHandler()
-    handler.setLevel("INFO")
-    handler.setFormatter(log_fmt)
-    logger.setLevel("INFO")
-    logger.addHandler(handler)
-
-    logpath = os.path.basename(os.path.abspath(__file__)) + ".log"
-    logpath = os.path.join(yml["DIR"]["LOG_DIR"], logpath)
-    handler = FileHandler(logpath, "a")
-    handler.setLevel(DEBUG)
-    handler.setFormatter(log_fmt)
-    logger.setLevel(DEBUG)
-    logger.addHandler(handler)
-
-    for key in yml:
-        for param in yml[key]:
-            logger.info(f"para: {param}={yml[key][param]}")
+    for key in config:
+        for param in config[key]:
+            logger.info(f"para: {param}={config[key][param]}")
 
     start = time.time()
     main()
