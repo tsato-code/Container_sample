@@ -1,3 +1,4 @@
+from logger import logger
 import argparse
 import yaml
 
@@ -11,3 +12,7 @@ def get_args():
 
 
 config = yaml.safe_load(open(get_args().yaml))
+
+for key in config:
+    for param in config[key]:
+        logger.info(f"setting: {param}={config[key][param]}")

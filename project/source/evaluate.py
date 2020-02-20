@@ -32,10 +32,6 @@ def main():
 
 
 if __name__ == "__main__":
-    for key in config:
-        for param in config[key]:
-            logger.info(f"param: {param}={config[key][param]}")
-
     start = time.time()
     main()
     elapsed = time.time() - start
