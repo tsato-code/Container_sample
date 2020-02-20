@@ -62,7 +62,7 @@ if __name__ == "__main__":
     for key in yml:
         for param in yml[key]:
             logger.info(f"param: {param}={yml[key][param]}")
-    
+
     start = time.time()
     main()
     elapsed = time.time() - start
