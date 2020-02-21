@@ -4,7 +4,6 @@ from sklearn.model_selection import train_test_split
 import lightgbm as lgb
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 import pandas as pd
 import pickle
 import seaborn as sns
@@ -88,7 +87,7 @@ def main():
 
     # plot importance
     plot_importance(model)
-    
+
     # save
     with open(config["LGBM"]["MODEL_PATH"], "wb") as f:
         pickle.dump(model, f)

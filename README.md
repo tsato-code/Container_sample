@@ -61,9 +61,12 @@ $ pytest
 ├── Dockerfile
 ├── README.md
 ├── docker-compose.yml
+├── docs
+│   ├── fig01.png
+│   └── overview_description.key
 ├── invoke.yml
 ├── project
-│   ├── _config.yml
+│   ├── config.yml
 │   ├── data
 │   │   ├── pickle
 │   │   │   ├── X_test.pkl
@@ -77,9 +80,10 @@ $ pytest
 │   │       └── OnlineNewsPopularity.zip
 │   ├── figure
 │   │   ├── lbg_loss.png
-│   │   ├── lgb_importance.png
+│   │   └── lgb_importance.png
 │   ├── logs
 │   │   ├── evaluate.py.log
+│   │   ├── logger.py.log
 │   │   ├── prepare.py.log
 │   │   └── train.py.log
 │   ├── models
@@ -87,13 +91,15 @@ $ pytest
 │   ├── notebook
 │   │   ├── lgb.ipynb
 │   │   └── nn_3layer.ipynb
-│   └── source
-│       ├── __init__.py
-│       ├── config.py
-│       ├── evaluate.py
-│       ├── hello.py
-│       ├── prepare.py
-│       └── train.py
-├── tasks.py
-└── tests
+│   ├── source
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   ├── evaluate.py
+│   │   ├── hello.py
+│   │   ├── logger.py
+│   │   ├── prepare.py
+│   │   └── train.py
+│   └── tests
+│       └── test_hello.py
+└── tasks.py
 ```

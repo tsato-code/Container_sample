@@ -1,7 +1,6 @@
 from config import config
 from logger import logger
 import numpy as np
-import os
 import pickle
 import time
 

@@ -29,7 +29,8 @@ def get_logger():
     handler.setFormatter(log_fmt)
     logger.setLevel(DEBUG)
     logger.addHandler(handler)
-    
+
     return logger
+
 
 logger = get_logger()
