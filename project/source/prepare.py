@@ -65,7 +65,7 @@ def main():
     df = pd.read_csv(config["PATH"]["DATA_PATH"], header=0, index_col=None, skipinitialspace=True, engine='python')
 
     # split data
-    train_df, test_df = train_test_split(df, test_size=9644, random_state=0)
+    train_df, test_df = train_test_split(df, test_size=0.2, random_state=0)
     logger.info(f"# train: {len(train_df)}")
     logger.info(f"# test: {len(test_df)}")
 

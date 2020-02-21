@@ -33,21 +33,19 @@ def plot_importance(model):
     ax = fig.add_subplot(111)
     sns.barplot(data=feature_importance, x="importance", y="feature_name", ax=ax)
     plt.savefig(config["LGBM"]["IMPORTANCE_PATH"], bbox_inches="tight")
-
-    # save
-    with open(config["LGBM"]["MODEL_PATH"], "wb") as f:
-        pickle.dump(model, f)
     logger.info(f"save {config['LGBM']['MODEL_PATH']}")
 
 
-def plot_loss(result_df):
+def plot_loss(result_dic):
+    result_df = pd.DataFrame(result_dic["training"]).add_prefix("train_").join(pd.DataFrame(result_dic["valid_1"]).add_prefix("valid_"))
     fig, ax = plt.subplots(figsize=(10, 6))
     result_df[["train_mape", "valid_mape"]].plot(ax=ax)
-    ax.set_xscale('symlog')
+    ax.set_xscale("symlog")
     ax.set_ylabel("MAPE [%]")
     ax.set_xlabel("# iteration")
     ax.grid()
     plt.savefig(config["LGBM"]["LOSS_PATH"])
+    logger.info(f"save {config['LGBM']['LOSS_PATH']}")
 
 
 def main():
@@ -60,7 +58,7 @@ def main():
     logger.info(f"load {config['PATH']['Y_TRAIN_PATH']}")
 
     # split
-    X_trn, X_val, y_trn, y_val = train_test_split(X_train, y_train, test_size=10000, random_state=0)
+    X_trn, X_val, y_trn, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=0)
 
     # cast
     lgb_dataset_trn = lgb.Dataset(X_trn, label=y_trn, categorical_feature="auto")
@@ -69,10 +67,11 @@ def main():
     params = {
         "objective": "rmse",
         "learning_rate": 0.1,
-        "max_depth": 4
+        "max_depth": -1
     }
 
     # train
+    logger.info(f"start learning!")
     result_dic = {}
     model = lgb.train(
         params=params,
@@ -85,11 +84,15 @@ def main():
     )
 
     # show loss
-    result_df = pd.DataFrame(result_dic["training"]).add_prefix("train_").join(pd.DataFrame(result_dic["valid_1"]).add_prefix("valid_"))
-    plot_loss(result_df)
+    plot_loss(result_dic)
 
     # plot importance
     plot_importance(model)
+    
+    # save
+    with open(config["LGBM"]["MODEL_PATH"], "wb") as f:
+        pickle.dump(model, f)
+    logger.info(f"save {config['LGBM']['MODEL_PATH']}")
 
 
 if __name__ == "__main__":

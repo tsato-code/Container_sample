@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo start pytest
+
+pytest
+
+status=$?
+
+if [ $status -eq 0 ] ; then
+    echo "* * * success! * * *"
+else
+    echo "* * * failed! * * *"
+fi
+
+exit $status

@@ -24,6 +24,7 @@ def main():
     # load model
     with open(config["LGBM"]["MODEL_PATH"], "rb") as f:
         model = pickle.load(f)
+    logger.info(f"load {config['LGBM']['MODEL_PATH']}")
 
     # show test mape
     test_pred = model.predict(X_test)

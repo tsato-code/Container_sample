@@ -4,6 +4,8 @@
 - Train and evaluate using LightGBM or TensorFlow.
 - The [OnlineNewsPopularity](https://archive.ics.uci.edu/ml/datasets/Online+News+Popularity) dataset is used.
 
+<img src="docs/fig01.png" width=800pt>
+
 ## Setup
 You need to prepare [docker](https://www.docker.com/) environment.
 
