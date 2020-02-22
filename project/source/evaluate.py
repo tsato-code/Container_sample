@@ -1,6 +1,5 @@
 from config import config
 from logger import logger
-import numpy as np
 import pickle
 import time
 from utils import calc_mape

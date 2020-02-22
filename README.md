@@ -1,6 +1,6 @@
 # Sample code for machine learning container
 ## Overview
-- This repository is sample code for a machine learning container.
+- This repository is a sample code for a machine learning container.
 - Train and evaluate using LightGBM or TensorFlow.
 - The [OnlineNewsPopularity](https://archive.ics.uci.edu/ml/datasets/Online+News+Popularity) dataset is used.
 
