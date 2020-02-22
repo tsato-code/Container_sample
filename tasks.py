@@ -41,5 +41,3 @@ def evaluate(ctx):
     cmd = f"docker exec -i -w /tmp/working {ctx.container_name} python project/source/evaluate.py"
     print(cmd)
     ctx.run(cmd)
-
-

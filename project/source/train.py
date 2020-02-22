@@ -1,25 +1,13 @@
 from config import config
 from logger import logger
 from sklearn.model_selection import train_test_split
+from utils import mape_func
 import lightgbm as lgb
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import pickle
 import seaborn as sns
 import time
-
-
-def calc_mape(y_true, y_pred):
-    data_num = len(y_true)
-    mape = (np.sum(np.abs(y_pred - y_true) / y_true) / data_num) * 100
-    return mape
-
-
-def mape_func(y_pred, data):
-    y_true = data.get_label()
-    mape = calc_mape(y_true, y_pred)
-    return "mape", mape, False
 
 
 def plot_importance(model):
@@ -63,11 +51,7 @@ def main():
     lgb_dataset_trn = lgb.Dataset(X_trn, label=y_trn, categorical_feature="auto")
     lgb_dataset_val = lgb.Dataset(X_val, label=y_val, categorical_feature="auto")
 
-    params = {
-        "objective": "rmse",
-        "learning_rate": 0.1,
-        "max_depth": -1
-    }
+    params = config["LGBM"]["PARAMS"]
 
     # train
     logger.info(f"start learning!")

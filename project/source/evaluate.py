@@ -3,12 +3,7 @@ from logger import logger
 import numpy as np
 import pickle
 import time
-
-
-def calc_mape(y_true, y_pred):
-    data_num = len(y_true)
-    mape = (np.sum(np.abs(y_pred - y_true) / y_true) / data_num) * 100
-    return mape
+from utils import calc_mape
 
 
 def main():

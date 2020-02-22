@@ -17,3 +17,19 @@ LGBM:
     LOSS_PATH: "./project/figure/lbg_loss.png"
     IMPORTANCE_PATH: "./project/figure/lgb_importance.png"
     MODEL_PATH: "./project/models/lgb.pkl"
+    PARAMS:
+        objective: "rmse"
+        bagging_freq: 5
+        bagging_fraction: 1.0
+        boost_from_average: "false"
+        boost: "gbdt"
+        early_stopping: 1000
+        feature_fraction: 1.0
+        learning_rate: 0.01
+        max_depth: -1
+        min_data_in_leaf: 30
+        min_sum_hessian_in_leaf: 10.0
+        num_leaves: 64
+        num_threads: 0
+        tree_learner: "serial"
+        verbosity: 0
