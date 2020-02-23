@@ -6,6 +6,16 @@
 
 <img src="docs/fig01.png" width=800pt>
 
+## Module I/O interface
+| Module   	| Description					| Input 	            | Output           	            |
+|----------	|----------------------------	|-------------------	|----------------------------	|
+| Prepare  	| Get dataset and transforme 	| Data file (*.csv) 	| Feature file (*.pkl)          |
+| Train    	| Train the model 				| Feature file (*.pkl) 	| Model file (*.pkl)   	        |
+| 			| 					        	| 						| Importance plot file (*.png)  |
+|			|								|						| Loss plot file (*.png)		|
+| Evaluate  | Evaluate the Model 			| Model file (*.pkl) 	|        						|
+|          	|								| Feature file (*.pkl) 	| 								|
+
 ## Setup
 You need to prepare [docker](https://www.docker.com/) environment.
 
@@ -42,18 +52,6 @@ $ inv evaluate
 ```
 $ pytest
 ```
-
-## Module design
-| Module   	| Description					| Input 	            | Output           	            |
-|----------	|----------------------------	|-------------------	|----------------------------	|
-| Prepare  	| Get dataset and transforme 	| Data file (*.csv) 	| Feature file (*.pkl)          |
-| Train    	| Train the model 				| Feature file (*.pkl) 	| Model file (*.pkl)   	        |
-| 			| 					        	| 						| Importance plot file (*.png)  |
-|			|								|						| Loss plot file (*.png)		|
-| Evaluate  | Evaluate the Model 			| Model file (*.pkl) 	|        						|
-|          	|								| Feature file (*.pkl) 	| 								|
-
-
 
 ## Folder tree
 ```
