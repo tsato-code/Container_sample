@@ -3,18 +3,19 @@
 - This repository is a sample code for a machine learning container.
 - Train and evaluate using LightGBM or TensorFlow.
 - The [OnlineNewsPopularity](https://archive.ics.uci.edu/ml/datasets/Online+News+Popularity) dataset is used.
-
-<img src="docs/fig01.png" width=800pt>
+<div align="center">
+<img src="docs/fig01.png" width=650pt>
+</div>
 
 ## Module I/O interface
-| Module   	| Description					| Input 	            | Output           	            |
-|----------	|----------------------------	|-------------------	|----------------------------	|
-| Prepare  	| Get dataset and transforme 	| Data file (*.csv) 	| Feature file (*.pkl)          |
-| Train    	| Train the model 				| Feature file (*.pkl) 	| Model file (*.pkl)   	        |
-| 			| 					        	| 						| Importance plot file (*.png)  |
-|			|								|						| Loss plot file (*.png)		|
-| Evaluate  | Evaluate the Model 			| Model file (*.pkl) 	|        						|
-|          	|								| Feature file (*.pkl) 	| 								|
+| Module   	| Description					| Input 	            | Output           	            | I/O restriction |
+|----------	|----------------------------	|-------------------	|----------------------------	|- |
+| Prepare  	| Get dataset and transforme 	| Data file (*.csv) 	| Feature files (*.pkl)         | ---  |
+| Train    	| Train the model 				| Feature files (*.pkl) | Model file (*.pkl)   	        | --- |
+| 			| 					        	| ---			    	| Importance plot file (*.png)  | --- |
+|			|								| ---				    | Loss plot file (*.png)		| --- |
+| Evaluate  | Evaluate the Model 			| Model file (*.pkl) 	| ---       					| --- |
+|          	|								| Feature files (*.pkl) | ---							| --- |
 
 ## Setup
 You need to prepare [docker](https://www.docker.com/) environment.
